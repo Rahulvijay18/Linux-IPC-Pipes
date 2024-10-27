@@ -24,7 +24,8 @@ Testing the C Program for the desired output.
 # PROGRAM:
 
 ## C Program that illustrate communication between two process using unnamed pipes using Linux API system calls
-```
+```py
+#include<stdio.h>
 #include<stdlib.h>
 #include<sys/types.h> 
 #include<sys/stat.h> 
@@ -51,7 +52,18 @@ client(p1[1],p2[0]);
 wait(waits); 
 return 0; 
 } 
-
+void client(int wfd,int rfd) {
+int i,j,n; char fname[2000];
+char buff[2000];
+printf("ENTER THE FILE NAME :");
+scanf("%s",fname);
+printf("CLIENT SENDING THE REQUEST .... PLEASE WAIT\n");
+sleep(10);
+write(wfd,fname,2000);
+n=read(rfd,buff,2000);
+buff[n]='\0';
+printf("THE RESULTS OF CLIENTS ARE ...... \n"); write(1,buff,n);
+}
 void server(int rfd,int wfd) 
 { 
 int i,j,n; 
@@ -67,31 +79,18 @@ else
 n=read(fd,buff,2000); 
 write(wfd,buff,n); 
 }
-void client(int wfd,int rfd) {
-int i,j,n; char fname[2000];
-char buff[2000];
-printf("ENTER THE FILE NAME :");
-scanf("%s",fname);
-printf("CLIENT SENDING THE REQUEST .... PLEASE WAIT\n");
-sleep(10);
-write(wfd,fname,2000);
-n=read(rfd,buff,2000);
-buff[n]='\0';
-printf("THE RESULTS OF CLIENTS ARE ...... \n"); write(1,buff,n);
-}
 ```
 
 
 
 
 ## OUTPUT
-![image](https://github.com/user-attachments/assets/d6711b8c-c36e-4438-9220-f85689efe622)
+![alt text](image.png)
 
 
 ## C Program that illustrate communication between two process using named pipes using Linux API system calls
 
-```
-#include <unistd.h>
+```py
 #include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -106,7 +105,7 @@ exit(EXIT_SUCCESS);
 
 
 ## OUTPUT
-![image](https://github.com/user-attachments/assets/f3892884-84ad-4bc4-9116-b8e3816053b4)
+![alt text](image-1.png)
 
 # RESULT:
 The program is executed successfully.
